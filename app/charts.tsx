@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 import * as d3 from 'd3';
+import { shouldShowAllLabels } from 'echarts/types/src/coord/axisHelper.js';
 
 const Page: React.FC = () => {
   const [data, setData] = useState<{ year: number; trackNumber: number; energy: number; valence: number }[]>([]);
@@ -20,6 +21,9 @@ const Page: React.FC = () => {
 
   const getAveragesByYear = () => {
     const yearGroups = data.reduce((acc, { year, energy, valence }) => {
+      if (year === 0) {
+        return acc;
+      }
       if (!acc[year]) {
         acc[year] = { totalEnergy: 0, totalValence: 0, count: 0 };
       }
@@ -42,29 +46,35 @@ const Page: React.FC = () => {
 
   const averagesByYear = getAveragesByYear();
 
-  console.log(data);
+  console.log(averagesByYear.map(d => d.year));
 
   const options = {
-    grid: { top: 100, right: 8, bottom: 80, left: 36 },
+    grid: { top: 50, right: 8, left: 36, width: '70%', height: '50%' },
     xAxis: {
       type: 'category',
       data: averagesByYear.map(d => d.year),
+      boundaryGap: true,
     },
     yAxis: {
       type: 'value',
     },
     legend: {
       show: true,
-      data: ['Energy', 'Valence'],
-    }, 
+    },
     series: [
       {
+        name: 'Energy',
         data: averagesByYear.map(d => d.avgEnergy),
         type: 'line',
+        symbol: 'none',
+        areaStyle: {},
         smooth: true,
       }, {
+        name: 'Valence',
         data: averagesByYear.map(d => d.avgValence),
         type: 'line',
+        symbol: 'none',
+        areaStyle: {},
         smooth: true,
       }
     ],
@@ -73,18 +83,19 @@ const Page: React.FC = () => {
     },
     dataZoom: [
       {
+        type: 'slider',
+        top: '65%',
+        start: 0,
+        end: 100
+      }, {
         type: 'inside',
         start: 0,
-        end: 20
-      },
-      {
-        start: 0,
-        end: 20
+        end: 100
       }
     ],
   };
 
-  return <ReactECharts option={options} />;
+  return <ReactECharts option={options} style={{width: "600px", height: "600px"}} />;
 };
 
 export default Page;

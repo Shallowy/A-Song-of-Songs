@@ -7,9 +7,9 @@ const CATEGORY_DIM_COUNT = 10;
 const GAP = 0;
 const BASE_LEFT = 15;
 const BASE_TOP = 1;
-const GRID_WIDTH = 7;
-const GRID_HEIGHT = 7;
-const SYMBOL_SIZE = 1.8;
+const GRID_WIDTH = 8;
+const GRID_HEIGHT = 8;
+const SYMBOL_SIZE = 2;
 
 const names = ['Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence', 'Tempo', 'Popularity'];
 
@@ -129,7 +129,7 @@ function generateGrids(rawData: (number | string)[][]) {
         type: 'scatter',
         symbolSize: SYMBOL_SIZE,
         itemStyle: {
-          color: 'rgb(48, 75, 87)'
+          color: 'rgb(12, 70, 92)'
         },
         xAxisIndex: index,
         yAxisIndex: index,

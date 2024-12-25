@@ -21,7 +21,9 @@ export default function Home() {
 
   return (
     <div className="container" style={{margin: "auto auto", width: "1000px", height: "600px"}}>
-      <div style={{ marginBottom: '20px' }}>
+      <div style={{position: "absolute"}}><Chart2 /></div>
+      <div><Heatmap /></div>
+      {/* <div style={{ marginBottom: '20px' }}>
         <input
           type="text"
           value={searchQuery}
@@ -39,7 +41,7 @@ export default function Home() {
         </button>
       </div>
 
-      <Radar searchQuery={searchTerm} />
+      <Radar searchQuery={searchTerm} /> */}
     </div>
   );
 }

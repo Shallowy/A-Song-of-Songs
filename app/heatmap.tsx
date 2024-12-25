@@ -1,6 +1,7 @@
 'use client'
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
+import { ItemStyleMixin } from 'echarts/types/src/model/mixin/itemStyle.js';
 
 
 const Heatmap: React.FC = () => {
@@ -10,13 +11,13 @@ const Heatmap: React.FC = () => {
         });
     
     const options = {
-        gradientColor: ['#375673','#385774','#395874','#3a5975','#3b5a76','#3f5f7c','#496b8a','#537698','#5d82a6','#678eb4','#6c94ba','#719abe','#75a0c2','#7aa6c6','#7faccb','#87b3d1','#90bcd8','#97c3dd','#9ecae3','#a3cbe1','#a7ccdf','#accdde','#b1cedc','#b5cfda','#b9cfd7','#bdced5','#c2ced3','#c6ced0','#c9cfce','#cdcfcb','#d1d0c9','#d5d1c7','#d9d1c4','#dbd1c1','#ddd2bf','#e0d2bd','#e2d2ba','#e4d0b3','#e6cdab','#e7cba3','#e9c99c','#ebc896','#edc793','#eec690','#f0c58c','#f2c489','#f1c081','#efbd79','#eeb86f','#ecb467','#edb263','#edb061','#eeae60','#efad5e','#efaa5c','#e69e56','#dd9351','#d5884b','#cc7c45','#c6733f','#c16b38','#bd6332','#b85b2c','#b45326'],
+        gradientColor: ['#375673c0','#385774c0','#395874c0','#3a5975c0','#3b5a76c0','#3f5f7cc0','#496b8ac0','#537698c0','#5d82a6c0','#678eb4c0','#6c94bac0','#719abec0','#75a0c2c0','#7aa6c6c0','#7faccbc0','#87b3d1c0','#90bcd8c0','#97c3ddc0','#9ecae3c0','#a3cbe1c0','#a7ccdfc0','#accddec0','#b1cedcc0','#b5cfdac0','#b9cfd7c0','#bdced5c0','#c2ced3c0','#c6ced0c0','#c9cfcec0','#cdcfcbc0','#d1d0c9c0','#d5d1c7c0','#d9d1c4c0','#dbd1c1c0','#ddd2bfc0','#e0d2bdc0','#e2d2bac0','#e4d0b3c0','#e6cdabc0','#e7cba3c0','#e9c99cc0','#ebc896c0','#edc793c0','#eec690c0','#f0c58cc0','#f2c489c0','#f1c081c0','#efbd79c0','#eeb86fc0','#ecb467c0','#edb263c0','#edb061c0','#eeae60c0','#efad5ec0','#efaa5cc0','#e69e56c0','#dd9351c0','#d5884bc0','#cc7c45c0','#c6733fc0','#c16b38c0','#bd6332c0','#b85b2cc0','#b45326c0'],
         tooltip: {
             position: 'top'
         },
         grid: {
-            height: '70%',
-            width: '70%',
+            height: '80%',
+            width: '80%',
             left: '15%',
             top: '1%'
         },
@@ -35,8 +36,8 @@ const Heatmap: React.FC = () => {
         },
         visualMap: {
             type: 'continuous',
-            min: -1,
-            max: 1,
+            min: -0.98,
+            max: 1.02,
             calculable: true,
             orient: 'vertical',
             top: 'center',

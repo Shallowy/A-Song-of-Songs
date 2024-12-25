@@ -4,12 +4,14 @@ import ReactECharts from 'echarts-for-react';
 import csvReader from './dataLoad';
 
 const CATEGORY_DIM_COUNT = 10;
-const GAP = 2;
-const BASE_LEFT = 5;
-const BASE_TOP = 5;
-const GRID_WIDTH = 10;
-const GRID_HEIGHT = 10;
-const SYMBOL_SIZE = 2;
+const GAP = 0;
+const BASE_LEFT = 15;
+const BASE_TOP = 1;
+const GRID_WIDTH = 7;
+const GRID_HEIGHT = 7;
+const SYMBOL_SIZE = 1.8;
+
+const names = ['Danceability', 'Energy', 'Loudness', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence', 'Tempo', 'Popularity'];
 
 function retrieveScatterData(
   data: (number | string)[][],
@@ -42,22 +44,45 @@ function generateGrids(rawData: (number | string)[][]) {
         left: BASE_LEFT + i * (GRID_WIDTH + GAP) + '%',
         top: BASE_TOP + j * (GRID_HEIGHT + GAP) + '%',
         width: GRID_WIDTH + '%',
-        height: GRID_HEIGHT + '%'
+        height: GRID_HEIGHT + '%',
+        show: true,
+        borderWidth: 2,
+        borderColor: 'rgb(0, 20, 20, 0.1)',
+        // backgroundColor: 'rgb(255, 255, 255, 0.1)'
       });
 
       xAxis.push({
         splitNumber: 3,
         position: 'bottom',
+        name: j === CATEGORY_DIM_COUNT - 1 ? names[i] : '',
         axisLine: {
           show: j === CATEGORY_DIM_COUNT - 1,
           onZero: false
         },
         axisTick: {
           show: j === CATEGORY_DIM_COUNT - 1,
-          inside: true
+          inside: false
         },
         axisLabel: {
-          show: j === CATEGORY_DIM_COUNT - 1
+          show: j === CATEGORY_DIM_COUNT - 1,
+          margin: 10,
+          fontSize: 10,
+          rotate: 90,
+          // showMinLabel: false,
+          showMaxLabel: false,
+          
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: 'rgb(255, 255, 255, 0.1)'
+          }
+        },
+        nameLocation: 'middle',
+        nameRotate: 90,
+        nameGap: 30,
+        nameTextStyle: {
+          fontSize: 10,
         },
         type: 'value',
         gridIndex: index,
@@ -67,16 +92,33 @@ function generateGrids(rawData: (number | string)[][]) {
       yAxis.push({
         splitNumber: 3,
         position: 'left',
+        name: i === 0 ? names[j] : '',
         axisLine: {
           show: i === 0,
           onZero: false
         },
         axisTick: {
           show: i === 0,
-          inside: true
+          inside: false
         },
         axisLabel: {
-          show: i === 0
+          show: i === 0,
+          margin: 10,
+          fontSize: 10,
+          // showMinLabel: false,
+          showMaxLabel: false
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: 'rgb(255, 255, 255, 0.1)'
+          }
+        },
+        nameLocation: 'middle',
+        nameRotate: 0,
+        nameGap: 40,
+        nameTextStyle: {
+          fontSize: 10,
         },
         type: 'value',
         gridIndex: index,
@@ -86,6 +128,9 @@ function generateGrids(rawData: (number | string)[][]) {
       series.push({
         type: 'scatter',
         symbolSize: SYMBOL_SIZE,
+        itemStyle: {
+          color: 'rgb(48, 75, 87)'
+        },
         xAxisIndex: index,
         yAxisIndex: index,
         data: retrieveScatterData(rawData, i, j)
@@ -143,7 +188,7 @@ const Chart2: React.FC = () => {
 		series: [...gridOption.series]
 	};  
 
-  return <ReactECharts option={options} style={{width: "1000px", height: "600px"}} />;
+  return <ReactECharts option={options} style={{width: "1000px", height: "1000px"}} />;
 };
 
 export default Chart2;

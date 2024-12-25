@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
-import csvReader from './dataLoad';
+import { csvReader1 } from './dataLoad';
 
 const CATEGORY_DIM_COUNT = 10;
 const GAP = 0;
@@ -149,7 +149,7 @@ function generateGrids(rawData: (number | string)[][]) {
 }
 
 const Chart2: React.FC = () => {
-  const data = csvReader();
+  const data = csvReader1();
 	let rawData = data.map((d) => [
 		d.danceability,
 		d.energy,

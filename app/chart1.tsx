@@ -1,30 +1,82 @@
 'use client'
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
-import csvReader from './dataLoad';
+import { csvReader1 } from './dataLoad';
 
 const Chart1: React.FC = () => {
-  const data = csvReader();
+  const data = csvReader1();
 
   const getAveragesByYear = () => {
-    const yearGroups = data.reduce((acc, { year, energy, valence }) => {
+    const yearGroups = data.reduce((acc, {
+      year, 
+      danceability, 
+      energy,
+      speechiness,
+      acousticness,
+      instrumentalness,
+      liveness,
+      valence,
+      popularity
+    }) => {
       if (year === 0) {
         return acc;
       }
       if (!acc[year]) {
-        acc[year] = { totalEnergy: 0, totalValence: 0, count: 0 };
+        acc[year] = { 
+          totalDanceability: 0,
+          totalEnergy: 0,
+          totalSpeechiness: 0,
+          totalAcousticness: 0,
+          totalInstrumentalness: 0,
+          totalLiveness: 0,
+          totalValence: 0,
+          totalPopularity: 0,
+          count: 0 
+        };
       }
+      acc[year].totalDanceability += danceability;
       acc[year].totalEnergy += energy;
+      acc[year].totalSpeechiness += speechiness;
+      acc[year].totalAcousticness += acousticness;
+      acc[year].totalInstrumentalness += instrumentalness;
+      acc[year].totalLiveness += liveness;
       acc[year].totalValence += valence;
+      acc[year].totalPopularity += popularity;
       acc[year].count += 1;
       return acc;
-    }, {} as Record<number, { totalEnergy: number; totalValence: number; count: number }>);
+    }, {} as Record<number, { 
+      totalDanceability: number,
+      totalEnergy: number,
+      totalSpeechiness: number,
+      totalAcousticness: number,
+      totalInstrumentalness: number,
+      totalLiveness: number,
+      totalValence: number,
+      totalPopularity: number,
+      count: number
+    }>);
 
-    const averages = Object.entries(yearGroups).map(([year, { totalEnergy, totalValence, count }]) => {
+    const averages = Object.entries(yearGroups).map(([year, {
+      totalDanceability,
+      totalEnergy,
+      totalSpeechiness,
+      totalAcousticness,
+      totalInstrumentalness,
+      totalLiveness,
+      totalValence,
+      totalPopularity,
+      count
+    }]) => {
       return {
         year: Number(year),
+        avgDanceability: totalDanceability / count,
         avgEnergy: totalEnergy / count,
+        avgSpeechiness: totalSpeechiness / count,
+        avgAcousticness: totalAcousticness / count,
+        avgInstrumentalness: totalInstrumentalness / count,
+        avgLiveness: totalLiveness / count,
         avgValence: totalValence / count,
+        avgPopularity: totalPopularity / (count * 100),
       };
     });
 
@@ -50,6 +102,13 @@ const Chart1: React.FC = () => {
     },
     series: [
       {
+        name: 'Danceability',
+        data: averagesByYear.map(d => d.avgDanceability),
+        type: 'line',
+        symbol: 'none',
+        areaStyle: {},
+        smooth: true,
+      }, {
         name: 'Energy',
         data: averagesByYear.map(d => d.avgEnergy),
         type: 'line',
@@ -57,8 +116,43 @@ const Chart1: React.FC = () => {
         areaStyle: {},
         smooth: true,
       }, {
+        name: 'Speechiness',
+        data: averagesByYear.map(d => d.avgSpeechiness),
+        type: 'line',
+        symbol: 'none',
+        areaStyle: {},
+        smooth: true,
+      }, {
+        name: 'Acousticness',
+        data: averagesByYear.map(d => d.avgAcousticness),
+        type: 'line',
+        symbol: 'none',
+        areaStyle: {},
+        smooth: true,
+      }, {
+        name: 'Instrumentalness',
+        data: averagesByYear.map(d => d.avgInstrumentalness),
+        type: 'line',
+        symbol: 'none',
+        areaStyle: {},
+        smooth: true,
+      }, {
+        name: 'Liveness',
+        data: averagesByYear.map(d => d.avgLiveness),
+        type: 'line',
+        symbol: 'none',
+        areaStyle: {},
+        smooth: true, 
+      }, {
         name: 'Valence',
         data: averagesByYear.map(d => d.avgValence),
+        type: 'line',
+        symbol: 'none',
+        areaStyle: {},
+        smooth: true,
+      }, {
+        name: 'Popularity',
+        data: averagesByYear.map(d => d.avgPopularity),
         type: 'line',
         symbol: 'none',
         areaStyle: {},

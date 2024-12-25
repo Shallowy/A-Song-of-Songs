@@ -1,23 +1,10 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactECharts from 'echarts-for-react';
-import * as d3 from 'd3';
-import { shouldShowAllLabels } from 'echarts/types/src/coord/axisHelper.js';
+import csvReader from './dataLoad';
 
-const Page: React.FC = () => {
-  const [data, setData] = useState<{ year: number; trackNumber: number; energy: number; valence: number }[]>([]);
-
-  useEffect(() => {
-    d3.csv('/top_10000_1950-now.csv').then((csvData) => {
-      const parsedData = csvData.map((d) => ({
-        year: +d['Album Release Date'].slice(0, 4),
-        trackNumber: +d['Track Number'],
-        energy: +d['Energy'],
-        valence: +d['Valence'],
-      }));
-      setData(parsedData);
-    });
-  }, []);
+const Chart1: React.FC = () => {
+  const data = csvReader();
 
   const getAveragesByYear = () => {
     const yearGroups = data.reduce((acc, { year, energy, valence }) => {
@@ -46,7 +33,7 @@ const Page: React.FC = () => {
 
   const averagesByYear = getAveragesByYear();
 
-  console.log(averagesByYear.map(d => d.year));
+  // console.log(averagesByYear.map(d => d.year));
 
   const options = {
     grid: { top: 50, right: 8, left: 36, width: '70%', height: '50%' },
@@ -98,4 +85,4 @@ const Page: React.FC = () => {
   return <ReactECharts option={options} style={{width: "600px", height: "600px"}} />;
 };
 
-export default Page;
+export default Chart1;

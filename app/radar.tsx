@@ -10,6 +10,8 @@ const genreFromString = (genre: string): number => {
     case 'blues': return 3;
     case 'rock': return 4;
     case 'jazz': return 5;
+    case 'hip hop': return 6;
+    case 'reggae': return 7;
     default: return 0;
   }
 };
@@ -20,81 +22,63 @@ const Radar: React.FC = () => {
   const getAveragesByGenre = () => {
     const GenreGroups = data.reduce((acc, {
       genre,
-      romantic,
-      violence,
-      world_life,
-      shake_the_audience,
-      family,
-      obscene,
-      music,
-      sadness,
-      feelings,
+      danceability,
+      loudness,
+      acousticness,
+      instrumentalness,
+      valence,
+      energy,
     }) => {
       const index = genreFromString(genre);
       if (index === 0) {
         return acc;
       }
       if (!acc[index]) {
-        acc[index] = { 
-          totalRomantic: 0,
-          totalViolence: 0,
-          totalWorld_life: 0,
-          totalShake_the_audience: 0,
-          totalFamily: 0,
-          totalObscene: 0,
-          totalMusic: 0,
-          totalSadness: 0,
-          totalFeelings: 0,
+        acc[index] = {
+          totalDanceability: 0,
+          totalLoudness: 0,
+          totalAcousticness: 0,
+          totalInstrumentalness: 0,
+          totalValence: 0,
+          totalEnergy: 0,
           count: 0
         };
       }
-      acc[index].totalRomantic += romantic;
-      acc[index].totalViolence += violence;
-      acc[index].totalWorld_life += world_life;
-      acc[index].totalShake_the_audience += shake_the_audience;
-      acc[index].totalFamily += family;
-      acc[index].totalObscene += obscene;
-      acc[index].totalMusic += music;
-      acc[index].totalSadness += sadness;
-      acc[index].totalFeelings += feelings;
+      acc[index].totalDanceability += danceability;
+      acc[index].totalLoudness += loudness;
+      acc[index].totalAcousticness += acousticness;
+      acc[index].totalInstrumentalness += instrumentalness;
+      acc[index].totalValence += valence;
+      acc[index].totalEnergy += energy;
       acc[index].count += 1;
       return acc;
-    }, {} as Record<number, { 
-      totalRomantic: number,
-      totalViolence: number,
-      totalWorld_life: number,
-      totalShake_the_audience: number,
-      totalFamily: number,
-      totalObscene: number,
-      totalMusic: number,
-      totalSadness: number,
-      totalFeelings: number,
+    }, {} as Record<number, {
+      totalDanceability: number,
+      totalLoudness: number,
+      totalAcousticness: number,
+      totalInstrumentalness: number,
+      totalValence: number,
+      totalEnergy: number,
       count: number
     }>);
 
     const averages = Object.entries(GenreGroups).map(([genre, {
-      totalRomantic,
-      totalViolence,
-      totalWorld_life,
-      totalShake_the_audience,
-      totalFamily,
-      totalObscene,
-      totalMusic,
-      totalSadness,
-      totalFeelings,
+      totalDanceability,
+      totalLoudness,
+      totalAcousticness,
+      totalInstrumentalness,
+      totalValence,
+      totalEnergy,
       count
     }]) => {
-      return {
-        avgRomantic: totalRomantic / count,
-        avgViolence: totalViolence / count,
-        avgWorld_life: totalWorld_life / count,
-        avgShake_the_audience: totalShake_the_audience / count,
-        avgFamily: totalFamily / count,
-        avgObscene: totalObscene / count,
-        avgMusic: totalMusic / count,
-        avgSadness: totalSadness / count,
-        avgFeelings: totalFeelings / count,
-      };
+      return [
+        totalDanceability / count,
+        totalLoudness / count,
+        totalAcousticness / count,
+        totalInstrumentalness / count,
+        totalValence / count,
+        totalEnergy / count
+      ];
     });
 
     return averages;
@@ -106,7 +90,7 @@ const Radar: React.FC = () => {
 
   const lineStyle = {
     width: 1,
-    opacity: 1
+    opacity: 0.5
   };
 
   const options = {
@@ -121,26 +105,24 @@ const Radar: React.FC = () => {
 		tooltip: {
       trigger: 'item',
     },
-    visualMap: {
-      top: 'middle',
-      right: 10,
+    legend: {
+      bottom: 5,
+      data: ['Pop', 'Country', 'Blues', 'Rock', 'Jazz', 'Hip Hop', 'Reggae'],
+      itemGap: 30,
       textStyle: {
-        color: 'white',
+        color: '#eee',
+        fontSize: 20
       },
-      color: ['yellow', 'red'],
-      calculable: true
+      selectedMode: 'multiple'
     },
     radar: {
       indicator: [
-        { name: 'Romantic', max: 1 },
-        { name: 'Violence', max: 1 },
-        { name: 'World/Life', max: 1 },
-        { name: 'Shake the audience', max: 1 },
-        { name: 'Family', max: 1 },
-        { name: 'Obscene', max: 1 },
-				{ name: 'Music', max: 1 },
-				{ name: 'Sadness', max: 1 },
-        { name: 'Feelings', max: 1 },
+        { name: 'Danceability', max: 0.8 },
+        { name: 'Loudness', max: 0.8 },
+        { name: 'Acousticness', max: 0.8 },
+        { name: 'Instrumentalness', max: 0.8 },
+        { name: 'Valence', max: 0.8 },
+        { name: 'Energy', max: 0.8 }
       ],
       shape: 'circle',
       splitNumber: 5,
@@ -171,7 +153,51 @@ const Radar: React.FC = () => {
     series: {
       type: 'radar',
       lineStyle: lineStyle,
-      data: averagesByGenre,
+      data: [
+        {
+          value: averagesByGenre[0],
+          name: 'Pop',
+          itemStyle: {
+            color: '#FF0000'
+          },
+        }, {
+          value: averagesByGenre[1],
+          name: 'Country',
+          itemStyle: {
+            color: '#FF8800'
+          },
+        }, {
+          value: averagesByGenre[2],
+          name: 'Blues',
+          itemStyle: {
+            color: '#FFFF00'
+          },
+        }, {
+          value: averagesByGenre[3],
+          name: 'Rock',
+          itemStyle: {
+            color: '#888800'
+          },
+        }, {
+          value: averagesByGenre[4],
+          name: 'Jazz',
+          itemStyle: {
+            color: '#00FF00'
+          },
+        }, {
+          value: averagesByGenre[5],
+          name: 'Hip Hop',
+          itemStyle: {
+            color: '#00FFFF'
+          },
+        }, {
+          value: averagesByGenre[6],
+          name: 'Reggae',
+          itemStyle: {
+            color: '#0000FF'
+          },
+        }
+      ],
       symbol: 'none',
       itemStyle: {
         color: '#F9713C'
@@ -179,9 +205,10 @@ const Radar: React.FC = () => {
       emphasis: {
         lineStyle: {
           width: 4,
+          opacity: 0.9
         },
         areaStyle: {
-          color: 'rgba(0, 255, 0, 1)'
+          opacity: 0.5
         }
       },
       areaStyle: {

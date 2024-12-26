@@ -62,6 +62,12 @@ export const csvReader2 = () => {
 		music: number;
 		sadness: number;
 		feelings: number;
+		danceability: number;
+		loudness: number;
+		acousticness: number;
+		instrumentalness: number;
+		valence: number;
+		energy: number;
 	}[]>([]);
 
 	useEffect(() => {
@@ -82,6 +88,12 @@ export const csvReader2 = () => {
 				music: +d['music'],
 				sadness: +d['sadness'],
 				feelings: +d['feelings'],
+				danceability: +d['danceability'],
+				loudness: +d['loudness'],
+				acousticness: +d['acousticness'],
+				instrumentalness: +d['instrumentalness'],
+				valence: +d['valence'],
+				energy: +d['energy'],
 			}));
 			setData(parsedData);
 		});

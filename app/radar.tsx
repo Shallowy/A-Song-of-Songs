@@ -84,17 +84,7 @@ const Radar: React.FC = () => {
       totalFeelings,
       count
     }]) => {
-      return {
-        avgRomantic: totalRomantic / count,
-        avgViolence: totalViolence / count,
-        avgWorld_life: totalWorld_life / count,
-        avgShake_the_audience: totalShake_the_audience / count,
-        avgFamily: totalFamily / count,
-        avgObscene: totalObscene / count,
-        avgMusic: totalMusic / count,
-        avgSadness: totalSadness / count,
-        avgFeelings: totalFeelings / count,
-      };
+      return [ totalRomantic / count, totalViolence / count, totalWorld_life / count, totalShake_the_audience / count, totalFamily / count, totalObscene / count, totalMusic / count, totalSadness / count, totalFeelings / count]
     });
 
     return averages;
@@ -132,15 +122,15 @@ const Radar: React.FC = () => {
     },
     radar: {
       indicator: [
-        { name: 'Romantic', max: 1 },
-        { name: 'Violence', max: 1 },
-        { name: 'World/Life', max: 1 },
-        { name: 'Shake the audience', max: 1 },
-        { name: 'Family', max: 1 },
-        { name: 'Obscene', max: 1 },
-				{ name: 'Music', max: 1 },
-				{ name: 'Sadness', max: 1 },
-        { name: 'Feelings', max: 1 },
+        { name: 'Romantic', max: 0.2 },
+        { name: 'Violence', max: 0.2 },
+        { name: 'World/Life', max: 0.2 },
+        { name: 'Shake the audience', max: 0.2 },
+        { name: 'Family', max: 0.2 },
+        { name: 'Obscene', max: 0.2 },
+				{ name: 'Music', max: 0.2 },
+				{ name: 'Sadness', max: 0.2 },
+        { name: 'Feelings', max: 0.2 },
       ],
       shape: 'circle',
       splitNumber: 5,
@@ -171,7 +161,7 @@ const Radar: React.FC = () => {
     series: {
       type: 'radar',
       lineStyle: lineStyle,
-      data: averagesByGenre,
+      data: averagesByGenre.slice(0, 5),
       symbol: 'none',
       itemStyle: {
         color: '#F9713C'

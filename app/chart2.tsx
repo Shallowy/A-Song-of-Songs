@@ -5,7 +5,7 @@ import { csvReader1 } from './dataLoad';
 
 const CATEGORY_DIM_COUNT = 10;
 const GAP = 0;
-const BASE_LEFT = 15;
+const BASE_LEFT = 18;
 const BASE_TOP = 1;
 const GRID_WIDTH = 8;
 const GRID_HEIGHT = 8;
@@ -57,11 +57,17 @@ function generateGrids(rawData: (number | string)[][]) {
         name: j === CATEGORY_DIM_COUNT - 1 ? names[i] : '',
         axisLine: {
           show: j === CATEGORY_DIM_COUNT - 1,
-          onZero: false
+          onZero: false,
+          lineStyle: {
+            color: 'black'
+          }
         },
         axisTick: {
           show: j === CATEGORY_DIM_COUNT - 1,
-          inside: false
+          inside: false,
+          lineStyle: {
+            color: 'rgb(240, 240, 240)',
+          }
         },
         axisLabel: {
           show: j === CATEGORY_DIM_COUNT - 1,
@@ -70,7 +76,7 @@ function generateGrids(rawData: (number | string)[][]) {
           rotate: 90,
           // showMinLabel: false,
           showMaxLabel: false,
-          
+          color: 'rgb(240, 240, 240)',
         },
         splitLine: {
           show: true,
@@ -80,9 +86,11 @@ function generateGrids(rawData: (number | string)[][]) {
         },
         nameLocation: 'middle',
         nameRotate: 90,
-        nameGap: 30,
+        nameGap: 32,
         nameTextStyle: {
-          fontSize: 10,
+          color: 'rgb(240, 240, 240)',
+          fontWeight: 'bold',
+          fontSize: 11,
         },
         type: 'value',
         gridIndex: index,
@@ -95,11 +103,17 @@ function generateGrids(rawData: (number | string)[][]) {
         name: i === 0 ? names[j] : '',
         axisLine: {
           show: i === 0,
-          onZero: false
+          onZero: false,
+          lineStyle: {
+            color: 'rgb(240, 240, 240)'
+          }
         },
         axisTick: {
           show: i === 0,
-          inside: false
+          inside: false,
+          lineStyle: {
+            color: 'rgb(240, 240, 240)'
+          }
         },
         axisLabel: {
           show: i === 0,
@@ -118,7 +132,9 @@ function generateGrids(rawData: (number | string)[][]) {
         nameRotate: 0,
         nameGap: 40,
         nameTextStyle: {
-          fontSize: 10,
+          color: 'rgb(240, 240, 240)',
+          fontWeight: 'bold',
+          fontSize: 11,
         },
         type: 'value',
         gridIndex: index,
@@ -188,7 +204,7 @@ const Chart2: React.FC = () => {
 		series: [...gridOption.series]
 	};  
 
-  return <ReactECharts option={options} style={{width: "1000px", height: "1000px"}} />;
+  return <ReactECharts option={options} style={{width: "800px", height: "800px"}} />;
 };
 
 export default Chart2;

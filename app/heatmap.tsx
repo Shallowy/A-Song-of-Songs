@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import { ItemStyleMixin } from 'echarts/types/src/model/mixin/itemStyle.js';
+import { text } from 'd3';
 
 
 const Heatmap: React.FC = () => {
@@ -18,12 +19,15 @@ const Heatmap: React.FC = () => {
         grid: {
             height: '80%',
             width: '80%',
-            left: '15%',
+            left: '18%',
             top: '1%'
         },
         xAxis: {
             type: 'category',
             axisLabel: {
+                show: false
+            },
+            axisTick: {
                 show: false
             }
         },
@@ -31,6 +35,9 @@ const Heatmap: React.FC = () => {
             type: 'category',
             inverse: true,
             axisLabel: {
+                show: false
+            },
+            axisTick: {
                 show: false
             }
         },
@@ -42,10 +49,13 @@ const Heatmap: React.FC = () => {
             orient: 'vertical',
             top: 'center',
             right: 0,
+            textStyle: {
+                color: 'white'
+            }
         },
         series: [
             {
-            name: 'Punch Card',
+            name: 'Correlation',
             type: 'heatmap',
             data: data,
             label: {
@@ -61,7 +71,7 @@ const Heatmap: React.FC = () => {
         ]
     };
 
-    return <ReactECharts option={options} style={{width: "1000px", height: "1000px"}} />;
+    return <ReactECharts option={options} style={{width: "800px", height: "800px"}} />;
 }
 
 export default Heatmap;

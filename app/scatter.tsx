@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import { csvReader1 } from './dataLoad';
-import { line, symbol } from 'd3';
+import { line, symbol, text } from 'd3';
 import { format } from 'path';
 import { split } from 'postcss/lib/list';
 import { color } from 'echarts';
@@ -37,16 +37,30 @@ const Scatter: React.FC = () => {
     
     const options = {
       title: {
-        // text: 'Punch Card of Github'
+        text: 'Year & Artist & Popularity & Valence',
+        left: 'center',
+        textStyle: {
+          color: 'rgb(240, 240, 240)',
+          weight: 'bold'
+        },
+        top: -1
       },
       legend: {
+        show: false,
         // data: ['Punch Card'],
         // left: 'right'
       },
+      backgroundColor: "rgb(222, 222, 222, 0)",
+      textStyle: {
+        color: 'white',
+        weight: 'bold'
+      },
       tooltip: {
         show: true,
-        position: 'bottom',
-        formatter: '{c}'
+        position: 'left',
+        formatter: function (params: any) {
+            return params.value[4] + '<br>' + 'Year: ' + Math.round(params.value[0]);
+        }
       },
       grid: {
         left: 2,
@@ -100,7 +114,10 @@ const Scatter: React.FC = () => {
         axisTick: {
             show: true,
             interval: 0,
-            alignWithLabel: true
+            alignWithLabel: true,
+            lineStyle: {
+                color: 'white',
+            }
         },
         axisLine: {
           show: false
@@ -108,7 +125,7 @@ const Scatter: React.FC = () => {
       },
       series: [
         {
-          name: 'Punch Card',
+          name: 'Songs',
           type: 'scatter',
           symbol: 'circle',
           colorBy: 'data',
@@ -127,7 +144,7 @@ const Scatter: React.FC = () => {
 
   
 
-    return <ReactECharts option={options} style={{width: "1500px", height: "1000px"}} />;
+    return <ReactECharts option={options} style={{width: "1400px", height: "800px"}} />;
 };
 
 export default Scatter;

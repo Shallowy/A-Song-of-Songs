@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import { csvReader2 } from './dataLoad';
+import { text } from 'd3';
 
 const genreFromString = (genre: string): number => {
   switch (genre) {
@@ -94,24 +95,25 @@ const Radar: React.FC = () => {
   };
 
   const options = {
-    backgroundColor: '#161627',
+    // backgroundColor: '#161627',
     title: {
+      show: false,
       text: 'Radar',
       left: 'center',
       textStyle: {
-        color: '#eee'
+        color: '#eee',
       }
     },
 		tooltip: {
       trigger: 'item',
     },
     legend: {
-      bottom: 5,
+      bottom: -5,
       data: ['Pop', 'Country', 'Blues', 'Rock', 'Jazz', 'Hip Hop', 'Reggae'],
       itemGap: 30,
       textStyle: {
         color: '#eee',
-        fontSize: 20
+        fontSize: 15
       },
       selectedMode: 'multiple'
     },
@@ -127,7 +129,8 @@ const Radar: React.FC = () => {
       shape: 'circle',
       splitNumber: 5,
       axisName: {
-        color: 'rgb(238, 197, 102)'
+        color: 'rgb(238, 197, 102)',
+        fontSize: 15,
       },
       splitLine: {
         lineStyle: {
@@ -146,55 +149,57 @@ const Radar: React.FC = () => {
       },
       axisLine: {
         lineStyle: {
-          color: 'rgba(238, 197, 102, 0.5)'
+          color: 'rgba(235, 194, 99, 0.62)'
         }
-      }
+      },
     },
     series: {
       type: 'radar',
       lineStyle: lineStyle,
+      label: {
+      },
       data: [
         {
           value: averagesByGenre[0],
           name: 'Pop',
           itemStyle: {
-            color: '#FF0000'
+            color: '#7F0000'
           },
         }, {
           value: averagesByGenre[1],
           name: 'Country',
           itemStyle: {
-            color: '#FF8800'
+            color: '#cF8800'
           },
         }, {
           value: averagesByGenre[2],
           name: 'Blues',
           itemStyle: {
-            color: '#FFFF00'
+            color: '#dFdF00'
           },
         }, {
           value: averagesByGenre[3],
           name: 'Rock',
           itemStyle: {
-            color: '#888800'
+            color: '#989800'
           },
         }, {
           value: averagesByGenre[4],
           name: 'Jazz',
           itemStyle: {
-            color: '#00FF00'
+            color: '#007F00'
           },
         }, {
           value: averagesByGenre[5],
           name: 'Hip Hop',
           itemStyle: {
-            color: '#00FFFF'
+            color: '#00cFcF'
           },
         }, {
           value: averagesByGenre[6],
           name: 'Reggae',
           itemStyle: {
-            color: '#0000FF'
+            color: '#0000dF'
           },
         }
       ],

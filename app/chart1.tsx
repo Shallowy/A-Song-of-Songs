@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import { csvReader1 } from './dataLoad';
+import { text } from 'd3';
 
 const Chart1: React.FC = () => {
   const data = csvReader1();
@@ -88,17 +89,26 @@ const Chart1: React.FC = () => {
   // console.log(averagesByYear.map(d => d.year));
 
   const options = {
-    grid: { top: 50, right: 8, left: 36, width: '70%', height: '50%' },
+    grid: { top: 50, left: 180, width: '70%', height: '50%' },
     xAxis: {
       type: 'category',
       data: averagesByYear.map(d => d.year),
       boundaryGap: true,
+
+    },
+    // backgroundColor: "rgb(222, 222, 222, 0.4)",
+    textStyle: {
+      color: 'rgb(230, 230, 230, 1)',
     },
     yAxis: {
       type: 'value',
     },
     legend: {
       show: true,
+      textStyle: {
+        color: 'rgb(230, 230, 230, 1)',
+        weight: 'bold'
+      }
     },
     series: [
       {
@@ -165,9 +175,12 @@ const Chart1: React.FC = () => {
     dataZoom: [
       {
         type: 'slider',
-        top: '65%',
+        top: '68%',
         start: 0,
-        end: 100
+        end: 100,
+        textStyle: {
+          color: 'rgb(230, 230, 230, 1)',
+        }
       }, {
         type: 'inside',
         start: 0,
@@ -176,7 +189,7 @@ const Chart1: React.FC = () => {
     ],
   };
 
-  return <ReactECharts option={options} style={{width: "600px", height: "600px"}} />;
+  return <ReactECharts option={options} style={{width: "1200px", height: "600px"}} />;
 };
 
 export default Chart1;

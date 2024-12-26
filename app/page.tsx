@@ -6,6 +6,7 @@ import Chart2 from './chart2';
 import Heatmap from './heatmap';
 import Radar from './radar';
 import Scatter from './scatter';
+import { Cloud1, Cloud2, Cloud3, Cloud4, Cloud5, Cloud6, Cloud7, Cloud8 } from './cloud';
 import './styles.css'; // Import the CSS file
 
 const sections = [
@@ -14,6 +15,7 @@ const sections = [
   { title: 'Radar Chart', component: <Radar /> },
   { title: 'Chart 1', component: <Chart1 /> },
   { title: 'Chart 2', component: <Chart2 /> },
+  { title: 'Cloud', component: <Cloud1 /> },
 ];
 
 export default function Home() {
@@ -162,6 +164,35 @@ export default function Home() {
           <div style={{ flex: 1, display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", paddingTop: "4%", height: "100%", width: "100%" }}>
             <Radar />
           </div>
+        </section>
+        <section
+        className={`slide-${direction} ${currentSection === 5 ? `slide-${direction}-active` : ''}`}
+        style={{ transform: `translateY(${(5 - currentSection) * 100}%)`, backgroundImage: `url(images/one.jpg)`, backgroundSize: "cover" }}
+        >
+          <h2 style={{ 
+            position: "absolute", 
+            top: "10%", 
+            left: "50%", 
+            width: "70%",
+            transform: "translateX(-50%)", 
+            color: "white", 
+            fontSize: "2.5em", 
+            fontFamily: "Arial, sans-serif", 
+            textAlign: "center", 
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" 
+          }}>
+            Word Clouds of Different Themes
+          </h2>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', padding: '11.5% 10%' }}>
+              <div style={{ flex: '1 0 21%', margin: '2.5% 2%' }}><img src="images/01.jpg"></img></div>
+              <div style={{ flex: '1 0 21%', margin: '2.5% 2%' }}><img src="images/02.jpg"></img></div>
+              <div style={{ flex: '1 0 21%', margin: '2.5% 2%' }}><img src="images/03.jpg"></img></div>
+              <div style={{ flex: '1 0 21%', margin: '2.5% 2%' }}><img src="images/04.jpg"></img></div>
+              <div style={{ flex: '1 0 21%', margin: '2.5% 2%' }}><img src="images/05.jpg"></img></div>
+              <div style={{ flex: '1 0 21%', margin: '2.5% 2%' }}><img src="images/06.jpg"></img></div>
+              <div style={{ flex: '1 0 21%', margin: '2.5% 2%' }}><img src="images/07.jpg"></img></div>
+              <div style={{ flex: '1 0 21%', margin: '2.5% 2%' }}><img src="images/08.jpg"></img></div>
+            </div>
         </section>
       </div>
     </div>

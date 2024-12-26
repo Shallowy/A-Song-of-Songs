@@ -34,7 +34,7 @@ export const Cloud1: React.FC = () => {
     myChart.setOption(option);
   }, []);
 
-  return <div id="chart" style={{ width: 600, height: 400 }}></div>;
+  return <div id="chart" style={{ width: 300, height: 280 }}></div>;
 }
 
 export const Cloud2: React.FC = () => {
@@ -67,7 +67,7 @@ export const Cloud2: React.FC = () => {
     myChart.setOption(option);
   }, []);
 
-  return <div id="chart" style={{ width: 600, height: 400 }}></div>;
+  return <div id="chart" style={{ width: 300, height: 280 }}></div>;
 }
 
 export const Cloud3: React.FC = () => {
@@ -100,7 +100,7 @@ export const Cloud3: React.FC = () => {
     myChart.setOption(option);
   }, []);
 
-  return <div id="chart" style={{ width: 600, height: 400 }}></div>;
+  return <div id="chart" style={{ width: 300, height: 280 }}></div>;
 }
 
 export const Cloud4: React.FC = () => {
@@ -133,7 +133,7 @@ export const Cloud4: React.FC = () => {
     myChart.setOption(option);
   }, []);
 
-  return <div id="chart" style={{ width: 600, height: 400 }}></div>;
+  return <div id="chart" style={{ width: 300, height: 280 }}></div>;
 }
 
 export const Cloud5: React.FC = () => {
@@ -166,7 +166,7 @@ export const Cloud5: React.FC = () => {
     myChart.setOption(option);
   }, []);
 
-  return <div id="chart" style={{ width: 600, height: 400 }}></div>;
+  return <div id="chart" style={{ width: 300, height: 280 }}></div>;
 }
 
 export const Cloud6: React.FC = () => {
@@ -199,7 +199,7 @@ export const Cloud6: React.FC = () => {
     myChart.setOption(option);
   }, []);
 
-  return <div id="chart" style={{ width: 600, height: 400 }}></div>;
+  return <div id="chart" style={{ width: 300, height: 280 }}></div>;
 }
 
 export const Cloud7: React.FC = () => {
@@ -232,7 +232,7 @@ export const Cloud7: React.FC = () => {
     myChart.setOption(option);
   }, []);
 
-  return <div id="chart" style={{ width: 600, height: 400 }}></div>;
+  return <div id="chart" style={{ width: 300, height: 280 }}></div>;
 }
 
 export const Cloud8: React.FC = () => {
@@ -265,5 +265,5 @@ export const Cloud8: React.FC = () => {
     myChart.setOption(option);
   }, []);
 
-  return <div id="chart" style={{ width: 600, height: 400 }}></div>;
+  return <div id="chart" style={{ width: 300, height: 280}}></div>;
 }
